@@ -1,0 +1,16 @@
+extends layout
+ 
+block content
+  h1= title
+  - const results = [{ instrument_name: "Guitar", manufacturer: "Fender", price: 599 },{ instrument_name: "Drums", manufacturer: "Pearl", price: 899 },{ instrument_name: "Keyboard", manufacturer: "Yamaha", price: 499 },{ instrument_name: "Violin", manufacturer: "Stradivarius", price: 1999 }, { instrument_name: "Piano", manufacturer: "Steinway", price: 2999 }, ]
+  script.
+    function buy(index){
+      alert("You purchased items "+ (index+1));
+    }
+  div.container-fluid
+    div.row
+        each item, index in results
+          div.col-sm-2(onclick = `buy(${index})`)
+             p instrument_name: #{item.instrument_name}
+             p manufacturer: #{item.manufacturer}
+             p price: $#{item.price.toFixed(2)}
