@@ -3,26 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 require('dotenv').config();
 const connectionString = process.env.MONGO_CON
 const mongoose = require('mongoose');
 mongoose.connect(connectionString,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-    
+    useUnifiedTopology: true,
+    wtimeoutMS:50000
   });
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var instrumentRouter = require('./routes/instruments');
-var boardRouter = require('./routes/board');
-var chooseRouter = require('./routes/choose');
-var Instrument = require("./models/instrumentSchema");
-var resourceRouter = require('./routes/resource');
-var app = express();
-
-//Get the default connection
+//Get the default connections
 
 var db = mongoose.connection;
 //Bind connection to error event
@@ -32,14 +23,23 @@ db.once("open", function () {
 });
 
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var instrumentRouter = require('./routes/instruments');
+var boardRouter = require('./routes/board');
+var chooseRouter = require('./routes/choose');
+var Instrument = require("./models/instrument");
+var resourceRouter = require('./routes/resource');
+var app = express();
+
+
 //const Instrument = mongoose.model("Instrument", instrumentSchema);
 
 
 // We can seed the collection if needed onserver start
-async function recreateDB() {
+async function  recreateDB() {
   
   console.log("**********")
-  
   // Delete everything
  // mongoose.set('bufferTimeoutMS', 50000);
   await Instrument.deleteMany();

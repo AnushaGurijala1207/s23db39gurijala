@@ -6,24 +6,15 @@ var instrument_controller = require('../controllers/instrument');
 /// API ROUTE ///
 // GET resources base.
 router.get('/', api_controller.api);
-/// COSTUME ROUTES ///
-// POST request for creating a Costume.
+/// Instrument ROUTES ///
+// POST request for creating a Instrument.
 router.post('/instruments', instrument_controller.instrument_create_post);
-// DELETE request to delete Costume.
+// DELETE request to delete Instrument.
 router.delete('/instruments/:id', instrument_controller.instrument_delete);
-// PUT request to update Costume.
+// PUT request to update Instrument.
 router.put('/instruments/:id', instrument_controller.instrument_update_put);
-// GET request for one Costume.
+// GET request for one Instrument.
 router.get('/instruments/:id', instrument_controller.instrument_detail);
-// GET request for list of all Costume items.
+// GET request for list of all Instrument items.
 router.get('/instruments', instrument_controller.instrument_list);
 module.exports = router;
-// API for our resources
-exports.api = function(req, res) {
-res.write('[');
-res.write('{"resource":"instrument", ');
-res.write(' "verbs":["GET","PUT", "DELETE"] ');
-res.write('}');
-res.write(']')
-res.send();
-};
