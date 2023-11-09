@@ -9,13 +9,13 @@ const mongoose = require('mongoose');
 mongoose.connect(connectionString,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    wtimeout: 30000
+    useUnifiedTopology: true
+    
   });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var instrumentRouter = require('./routes/instrument');
+var instrumentRouter = require('./routes/instruments');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var Instrument = require("./models/instrumentSchema");
@@ -80,13 +80,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/instruments', instrumentRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/instruments', instrumentRouter);
+
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
+
 
 app.use(function (req, res, next) {
   next(createError(404));
