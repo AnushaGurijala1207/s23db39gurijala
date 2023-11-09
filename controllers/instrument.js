@@ -27,9 +27,23 @@ exports.instrument_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Instrument detail: ' + req.params.id);
 };
 // Handle Instrument create on POST.
-exports.instrument_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: Instrument create POST');
-};
+
+exports.instrument_create_post = async function(req, res) {
+    console.log(req.body)
+let document = new Instrument();
+document.instrument_name = req.body.instrument_name;
+document.manufacturer = req.body.manufacturer;
+document.price = req.body.price;
+try{
+    let result = await document.save();
+    res.send(result);
+ }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+ };
+    
 // Handle Instrument delete form on DELETE.
 exports.instrument_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Instrument delete DELETE ' + req.params.id);
