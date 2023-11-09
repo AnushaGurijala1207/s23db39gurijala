@@ -1,8 +1,27 @@
 var Instrument = require('../models/instrument');
-// List of all Instruments
-exports.instrument_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Instrument list');
+// List of all Costumes
+exports.instrument_list = async function(req, res) {
+try{
+theInstruments = await Instrument.find();
+res.send(theInstruments);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
 };
+// VIEWS
+// Handle a show all view
+exports.instrument_view_all_Page = async function(req, res) {
+try{
+theInstruments = await Instrument.find();
+res.render('instruments', { title: 'Instrument Search Results', results: theInstruments });
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+}
 // for a specific Instruments.
 exports.instrument_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Instrument detail: ' + req.params.id);
