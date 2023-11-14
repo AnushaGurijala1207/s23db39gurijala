@@ -93,7 +93,19 @@ exports.instrument_view_one_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
     };
-    
+// Handle building the view for updating a instrument.
+// query provides the id
+exports.instrument_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await Instrument.findById(req.query.id)
+    res.render('instrumentupdate', { title: 'Instrument Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };   
 // Handle Instrument update form on PUT.
 exports.instrument_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body${JSON.stringify(req.body)}`)
