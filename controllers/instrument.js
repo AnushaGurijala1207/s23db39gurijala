@@ -80,6 +80,20 @@ exports.instrument_view_one_Page = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
     };
+    // Handle building the view for creating a costume.
+    // No body, no in path parameter, no query.
+    // Does not need to be async
+    exports.instrument_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('instrumentcreate', { title: 'Instrument Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
+    
 // Handle Instrument update form on PUT.
 exports.instrument_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body${JSON.stringify(req.body)}`)

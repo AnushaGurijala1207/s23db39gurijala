@@ -8,4 +8,6 @@ router.get('/', instrument_controlers.instrument_view_all_Page );
 router.get('/instruments/:id', instrument_controlers.instrument_detail)
 /* GET detail instrument page */
 router.get('/detail', instrument_controlers.instrument_view_one_Page);
+/* GET create instrument page */
+router.get('/create', instrument_controlers.instrument_create_Page);
 module.exports = router;
