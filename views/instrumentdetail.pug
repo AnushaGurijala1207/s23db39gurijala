@@ -1,20 +1,49 @@
 extends layout
+
 block content
-    h1= title
+  style.
+    .instrument-container {
+      margin-top: 20px;
+    }
+
+    .instrumentAttr {
+      font-weight: bold;
+    }
+
+    .instrument-info {
+      margin-bottom: 10px;
+    }
+
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
     - let instrumentid = toShow._id
     - let instrument_name = toShow.instrument_name
     - let manufacturer = toShow.manufacturer
     - let price = toShow.price
-    div
-    div.row
-    div(class='instrumentAttr mr-3') Instrument ID is:
-    div #{instrumentid}
-    div.row
-    div(class='instrumentAttr mr-3') Instrument Name is:
-    div #{instrument_name}
-    div.row
-    div(class='instrumentAttr mr-3') Instrument manufacturer is:
-    div #{manufacturer}
-    div.row
-    div(class='instrumentAttr mr-3') Instrument Cost is:
-    div #{price}
+
+    .instrument-container
+      .row.instrument-info
+        .col-md-3
+          div(class='instrumentAttr') Instrument ID:
+        .col-md-3
+          div #{instrumentid}
+
+      .row.instrument-info
+        .col-md-3
+          div(class='instrumentAttr') Instrument Name:
+        .col-md-3
+          div #{instrument_name}
+
+      .row.instrument-info
+        .col-md-3
+          div(class='instrumentAttr') Instrument Manufacturer:
+        .col-md-3
+          div #{manufacturer}
+
+      .row.instrument-info
+        .col-md-3
+          div(class='instrumentAttr') Instrument Cost:
+        .col-md-3
+          div #{price}
