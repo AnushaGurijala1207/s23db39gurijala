@@ -126,3 +126,18 @@ exports.instrument_update_put = async function (req, res) {
         res.send(`{"error": ${err}: Update for id ${req.params.id}failed`);
     }
 };
+//Handle a delete one view with id from query
+exports.instrument_delete_Page = async function(req, res) {
+console.log("Delete view for id " + req.query.id)
+try{
+result = await Instrument.findById(req.query.id)
+res.render('instrumentdelete', { title: 'Instrument Delete', toShow:
+result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+

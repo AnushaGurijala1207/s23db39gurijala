@@ -12,5 +12,7 @@ router.get('/detail', instrument_controlers.instrument_view_one_Page);
 router.get('/create', instrument_controlers.instrument_create_Page);
 /* GET create update page */
 router.get('/update', instrument_controlers.instrument_update_Page);
+/* GET delete instrument page */
+router.get('/delete', instrument_controlers.instrument_delete_Page);
 
 module.exports = router;
