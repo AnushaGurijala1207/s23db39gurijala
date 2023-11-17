@@ -2,7 +2,7 @@ var Instrument = require('../models/instrument');
 // List of all Costumes
 exports.instrument_list = async function (req, res) {
     try {
-        theInstruments = await Instrument.find();
+       var theInstruments = await Instrument.find();
         res.send(theInstruments);
     }
     catch (err) {
@@ -14,7 +14,7 @@ exports.instrument_list = async function (req, res) {
 // Handle a show all view
 exports.instrument_view_all_Page = async function (req, res) {
     try {
-        theInstruments = await Instrument.find();
+        var theInstruments = await Instrument.find();
         res.render('instruments', { title: 'Instrument Search Results', results: theInstruments });
     }
     catch (err) {
