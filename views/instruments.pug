@@ -4,10 +4,21 @@ block content
   h1= title
   div(class="container-fluid")
     div(class="row m-1")
+      // Add the button at the top of the collection view
+      div(class="row m-1")
+        button.btn(class="btn-success", onclick="dispatch('/instruments/create')") Create New
+
       each item in results
-        - let destination = `dispatch("/instruments/update?id=${item._id}")`
-        div(class="row-sm-2", class="m-1") Item #{item.instrument_name}(#{item.manufacturer}) is #{item.price}
-          button.btn(class="btn-primary ml-1", onclick=destination) Update
+        - let updateDestination = `dispatch("/instruments/update?id=${item._id}")`
+        - let detailDestination = `dispatch("/instruments/detail?id=${item._id}")`
+        - let deleteDestination = `dispatch("/instruments/delete?id=${item._id}")`
+
+        // Display all three buttons in a single line for each item
+        div(class="row-sm-2 m-1")
+          | Item #{item.instrument_name}(#{item.manufacturer}) is #{item.price}
+          button.btn(class="btn-primary ml-1", onclick=updateDestination) Update 
+          button.btn(class="btn-primary m-1", onclick=detailDestination) Detail
+          button.btn(class="btn-primary m-1", onclick=deleteDestination) Delete
 
   script.
     function buy(index) {
